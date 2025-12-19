@@ -2,7 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const blogRoutes = require('./routes/blogRoutes');
 
-const app = express();
+const app =   express();
 
 // Handlebars setup
 app.engine('hbs', exphbs.engine({ extname: 'hbs' }));
