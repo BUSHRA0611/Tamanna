@@ -1,19 +1,6 @@
 const blogs = [
-  {
-    id: 1,
-    title: "First Blog",
-    content: "This is my first blog post."
-  },
-  {
-    id: 2,
-    title: "Second Blog",
-    content: "This is my second blog post."
-  },
-  {
-    id: 3,
-    title: "Third Blog",
-    content: "This is my third blog post."
-  }
+  { id: 1, title: "First Blog", content: "This is first blog content" },
+  { id: 2, title: "Second Blog", content: "This is second blog content" }
 ];
 
-module.exports = blogs;
+export default blogs;

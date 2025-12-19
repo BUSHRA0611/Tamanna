@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blogs</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .blog {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+      cursor: pointer;
+    }
+    .blog:hover {
+      background: #f5f5f5;
+    }
+    .blogContent {
+     color: rgb(9, 10, 10);
+    }
+    #singleBlog {
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>All Blogs</h1>
+  <div id="blogs"></div>
+
+  <div id="singleBlog">
+    <h2 id="blogTitle"></h2>
+    <p class="blogContent" id="blogContent"></p>
+    <button onclick="goBack()">⬅ Back</button>
+  </div>
+
+  <script>
+    const blogsDiv = document.getElementById("blogs");
+    const singleBlogDiv = document.getElementById("singleBlog");
+
+    // Load all blogs
+    async function loadBlogs() {
+      const res = await fetch("http://localhost:3000/api/v1/blogs/getallblogs");
+      const data = await res.json();
+
+      blogsDiv.innerHTML = "";
+      data.blogs.forEach(blog => {
+        const div = document.createElement("div");
+        div.className = "blog";
+        div.innerHTML = `<h3>${blog.title}</h3>`;
+        div.onclick = () => loadSingleBlog(blog.id);
+        blogsDiv.appendChild(div);
+      });
+    }
+
+    // Load single blog
+    async function loadSingleBlog(id) {
+      const res = await fetch(`http://localhost:3000/api/v1/blogs/getsingleblog/${id}`);
+      const blog = await res.json();
+
+      document.getElementById("blogTitle").innerText = blog.title;
+      document.getElementById("blogContent").innerText = blog.content;
+
+      blogsDiv.style.display = "none";
+      singleBlogDiv.style.display = "block";
+    }
+
+    function goBack() {
+      singleBlogDiv.style.display = "none";
+      blogsDiv.style.display = "block";
+    }
+
+    loadBlogs();
+  </script>
+
+</body>
+</html>

@@ -1,21 +1,20 @@
-const express = require('express');
-const router = express.Router();
-const blogs = require('../blogData');
+import express from 'express';
+import blogs from '../blogData.js';
 
-// Home page
-router.get('/', (req, res) => {
-  res.render('home');
-});
+const router = express.Router();
+
+
 
 // Blog list
-router.get('/blog', (req, res) => {
-  res.render('blog', { blogs });
+router.get('/getallblogs', (req, res) => {
+  res.status(200).json({ blogs: blogs });
 });
 
 // Single blog post
-router.get('/blog/:id', (req, res) => {
+router.get('/getsingleblog/:id', (req, res) => {
   const blog = blogs.find(b => b.id == req.params.id);
-  res.render('post', { blog });
+  res.status(200).json(blog);
+
 });
 
-module.exports = router;
+export default router;
