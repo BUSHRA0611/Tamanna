@@ -43,7 +43,7 @@
   </div>
 
   <script>
-    const blogsDiv = document.getElementById("blogs");
+    const blogsDiv = document.getElementById("blog");
     const singleBlogDiv = document.getElementById("singleBlog");
 
     // Load all blogs
@@ -66,8 +66,8 @@
       const res = await fetch(`http://localhost:3000/api/v1/blogs/getsingleblog/${id}`);
       const blog = await res.json();
 
-      document.getElementById("blogTitle").innerText = blog.title;
-      document.getElementById("blogContent").innerText = blog.content;
+      document.getElementById("Introduction To Dynamic Blogs").innerText = blog.title;
+      document.getElementById("Role Of Blogs").innerText = blog.content;
 
       blogsDiv.style.display = "none";
       singleBlogDiv.style.display = "block";
